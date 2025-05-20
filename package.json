@@ -6,5 +6,8 @@
   },
   "dependencies": {
     "mineflayer": "^2.36.0"
+  },
+  "devDependencies": {
+    "commander": "^10.0.1"
   }
 }
