@@ -1,4 +1,5 @@
 import json
+import os
 import subprocess
 from ollama_ia import gerar_plano_acao
 
@@ -36,7 +37,10 @@ def executar_plano(plano):
             print(f"[Bot] Ação desconhecida: {acao}")
 
 if __name__ == "__main__":
-    comando_usuario = input("Digite um comando: ")
+    # Lê o comando de uma variável de ambiente ou usa um padrão
+    comando_usuario = os.getenv("MINECRAFT_COMMAND", "Construa uma casa de madeira com 2 andares")
+    print(f"[Comando Automático]: {comando_usuario}")
+
     plano = gerar_plano_acao(comando_usuario, estado_jogo)
     print("[Plano gerado]:", json.dumps(plano, indent=2))
     executar_plano(plano)
