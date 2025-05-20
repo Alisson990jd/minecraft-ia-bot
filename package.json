@@ -1,14 +1,11 @@
 {
   "name": "minecraft-ia-bot",
   "version": "1.0.0",
-  "description": "Bot de Minecraft controlado por IA",
-  "main": "bot.js",
   "scripts": {
     "start": "node bot.js"
   },
   "dependencies": {
-    "mineflayer": "^2.36.0",
-    "minecraft-data": "git+https://github.com/PrismarineJS/minecraft-data.git #main"
+    "mineflayer": "^2.36.0"
   },
   "devDependencies": {
     "commander": "^10.0.1"
