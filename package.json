@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "mineflayer": "^2.36.0",
-    "minecraft-data": "prismarinejs/minecraft-data"  // Instala diretamente do GitHub
+    "minecraft-data": "prismarinejs/minecraft-data"
   },
   "devDependencies": {
     "commander": "^10.0.1"
