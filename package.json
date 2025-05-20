@@ -5,7 +5,7 @@
     "start": "node bot.js"
   },
   "dependencies": {
-    "mineflayer": "^2.36.0"
+    "mineflayer": "^4.29.0"
   },
   "devDependencies": {
     "commander": "^10.0.1"
