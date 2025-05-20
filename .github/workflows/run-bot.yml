@@ -32,7 +32,6 @@ jobs:
         run: |
           npm install
           npm install commander --save-dev
-          # Instala minecraft-data direto do GitHub
           npm install prismarinejs/minecraft-data --save
           npm install mineflayer --save
 
