@@ -1,0 +1,10 @@
+{
+  "name": "minecraft-ia-bot",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "mineflayer": "^2.36.0"
+  }
+}
