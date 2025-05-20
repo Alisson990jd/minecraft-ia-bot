@@ -36,9 +36,9 @@ jobs:
         run: |
           curl -fsSL https://ollama.com/install.sh  | sh
 
-      - name: Start Ollama Server (Background)
+      - name: Start Ollama Server in Background
         run: |
-          # Inicia o servidor em background e redireciona saída para evitar travamentos
+          # Inicia o servidor em background e redireciona saída
           ollama serve &> /dev/null &
           
           # Aguarda 10 segundos para garantir que o servidor esteja pronto
@@ -49,5 +49,7 @@ jobs:
           ollama pull llama3
 
       - name: Run Bot Executor
+        env:
+          MINECRAFT_COMMAND: "Construa uma casa de madeira com 2 andares"
         run: |
           python src/bot_executor.py
