@@ -33,6 +33,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y git
 
+      - name: Configure Git to use HTTPS
+        run: |
+          git config --global url."https://".insteadOf git://
+          git config --global url."https://github.com/ ".insteadOf "git@github.com:"
+
+      - name: Clear NPM cache
+        run: |
+          npm cache clean --force
+
       - name: Install Node dependencies
         run: |
           npm install
