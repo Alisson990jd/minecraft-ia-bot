@@ -32,7 +32,9 @@ jobs:
         run: |
           npm install
           npm install commander --save-dev
-          npm install minecraft-data --save
+          # Força instalação da versão mais recente do minecraft-data
+          npm install prismarinejs/minecraft-data --save
+          npm install mineflayer --save
 
       - name: Install Ollama
         run: |
@@ -40,7 +42,10 @@ jobs:
 
       - name: Start Ollama Server in Background
         run: |
+          # Inicia o servidor em background e redireciona saída
           nohup ollama serve > ollama.log 2>&1 &
+          
+          # Aguarda 10 segundos para garantir que o servidor esteja pronto
           sleep 10
 
       - name: Pull Llama3 Model
