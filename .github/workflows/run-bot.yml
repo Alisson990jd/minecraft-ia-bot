@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Git (required for git+https URLs)
+      - name: Install Git
         run: |
           sudo apt-get update
           sudo apt-get install -y git
@@ -39,7 +39,7 @@ jobs:
           npm install commander --save-dev
           npm install mineflayer --save
 
-      - name: Install minecraft-data from GitHub
+      - name: Install minecraft-data from GitHub (HTTPS)
         run: |
           npm install git+https://github.com/PrismarineJS/minecraft-data.git #main --save
 
