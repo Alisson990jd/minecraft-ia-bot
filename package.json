@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "mineflayer": "^2.36.0",
-    "minecraft-data": "^3.104.0"  // Versão correta
+    "minecraft-data": "^3.104.0"
   },
   "devDependencies": {
     "commander": "^10.0.1"
