@@ -1,5 +1,4 @@
-# src/bot_executor.py
-
+import os
 import json
 import subprocess
 
@@ -38,7 +37,10 @@ def executar_plano(plano):
         subprocess.run(["node", "bot.js", acao, *args])
 
 if __name__ == "__main__":
-    comando_usuario = input("Digite um comando: ")
+    # Lê o comando da variável de ambiente ou usa um padrão
+    comando_usuario = os.getenv("MINECRAFT_COMMAND", "Construa uma casa de madeira com 2 andares")
+    print(f"[Comando Automático]: {comando_usuario}")
+
     plano = gerar_plano_acao(comando_usuario, estado_jogo)
     print("[Plano gerado]:\n", json.dumps(plano, indent=2))
     executar_plano(plano)
