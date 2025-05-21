@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "mineflayer": "^4.23.0",
-    "mineflayer-pathfinder": "^2.4.5"
+    "mineflayer-pathfinder": "^2.4.5",
+    "mineflayer-collectblock": "^1.0.0"
   },
   "devDependencies": {
     "commander": "^10.0.1"
