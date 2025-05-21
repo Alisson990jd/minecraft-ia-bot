@@ -1,8 +1,8 @@
 const mineflayer = require('mineflayer');
-const { pathfinder, goals } = require('mineflayer-pathfinder');
+const { goals } = require('mineflayer-pathfinder');
+const collectBlock = require('mineflayer-collectblock');
 const { program } = require('commander');
 
-// Configuração do bot
 function criarBot() {
   const bot = mineflayer.createBot({
     host: 'Alisson9934.aternos.me',
@@ -11,20 +11,25 @@ function criarBot() {
     version: '1.20.4'
   });
 
-  // Plugin de pathfinding
-  bot.loadPlugin(pathfinder.pathfinder);
-  bot.loadPlugin(require('mineflayer-collectblock').plugin); // Coleta automática de blocos [[1]]
+  // ✅ Plugins carregados corretamente
+  bot.loadPlugin(require('mineflayer-pathfinder'));
+  bot.loadPlugin(collectBlock);
 
-  // Reconnect automático
+  // ✅ Reconnect automático
   bot.on('end', () => {
     console.log('Conexão perdida, reconectando...');
     setTimeout(criarBot, 5000);
   });
 
-  // Comandos genéricos via linha de comando
+  // ✅ Trata erros de conexão
+  bot.on('error', (err) => {
+    console.error('Erro de conexão:', err.message);
+  });
+
+  // ✅ Comandos CLI
   program
     .command('mover_para <x> <y> <z>')
-    .description('Move o bot para uma posição específica')
+    .description('Move o bot para uma posição')
     .action((x, y, z) => {
       const goal = new goals.GoalBlock(parseInt(x), parseInt(y), parseInt(z));
       bot.pathfinder.setGoal(goal);
@@ -32,14 +37,14 @@ function criarBot() {
 
   program
     .command('coletar <item> [quantidade]')
-    .description('Coleta um item específico')
+    .description('Coleta um item')
     .action((item, quantidade = '1') => {
       coletarItem(bot, item, parseInt(quantidade));
     });
 
   program
     .command('domar <animal>')
-    .description('Domar um animal (cavalo, lobo, etc.)')
+    .description('Domar um animal')
     .action((animal) => {
       domarAnimal(bot, animal);
     });
@@ -80,5 +85,4 @@ function domarAnimal(bot, animal) {
   }
 }
 
-// Iniciar bot
 criarBot();
