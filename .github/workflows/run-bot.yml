@@ -28,20 +28,24 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Install Git
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git
+
       - name: Install Node dependencies
         run: |
           npm install
+          npm install commander --save-dev
+          npm install mineflayer prismarine-pathfinder mineflayer-pathfinder --save
 
       - name: Install Ollama
         run: |
           curl -fsSL https://ollama.com/install.sh  | sh
 
-      - name: Start Ollama Server in Background
+      - name: Start Ollama Server
         run: |
-          # Inicia o servidor em background e redireciona saída
-          ollama serve &> /dev/null &
-          
-          # Aguarda 10 segundos para garantir que o servidor esteja pronto
+          nohup ollama serve > ollama.log 2>&1 &
           sleep 10
 
       - name: Pull Llama3 Model
@@ -50,6 +54,6 @@ jobs:
 
       - name: Run Bot Executor
         env:
-          MINECRAFT_COMMAND: "Construa uma casa de madeira com 2 andares"
+          MINECRAFT_COMMAND: "Domar um cavalo"
         run: |
           python src/bot_executor.py
