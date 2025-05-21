@@ -1,6 +1,9 @@
+# src/bot_executor.py
+
 import os
 import json
 import subprocess
+from ollama_ia import gerar_plano_acao  # ✅ Import da função
 
 # Estado inicial simulado
 estado_jogo = {
