@@ -42,7 +42,7 @@ jobs:
         run: |
           npm install
           npm install commander --save-dev
-          npm install mineflayer-collectblock --save
+           npm install mineflayer-pathfinder mineflayer-collectblock --save
 
       - name: Install Ollama
         run: |
