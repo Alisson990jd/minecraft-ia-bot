@@ -3,7 +3,6 @@ import json
 import subprocess
 from ollama_ia import gerar_plano_acao
 
-# Estado inicial simulado
 estado_jogo = {
     "inventario": [],
     "localizacao": "floresta",
@@ -11,7 +10,6 @@ estado_jogo = {
 }
 
 def executar_plano(plano):
-    """Envia cada ação do plano para o bot.js via linha de comando."""
     for passo in plano:
         acao = passo["acao"]
         args = []
@@ -27,10 +25,12 @@ def executar_plano(plano):
             continue
 
         print(f"[Bot] Executando: {acao} {' '.join(args)}")
-        subprocess.run(["node", "bot.js", acao, *args])
+        try:
+            subprocess.run(["node", "bot.js", acao, *args])
+        except Exception as e:
+            print(f"[Erro ao executar ação {acao}]: {e}")
 
 if __name__ == "__main__":
-    # Lê o comando da variável de ambiente ou usa um padrão
     comando_usuario = os.getenv("MINECRAFT_COMMAND", "Domar um cavalo")
     print(f"[Comando Automático]: {comando_usuario}")
 
