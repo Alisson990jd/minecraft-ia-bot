@@ -1,7 +1,7 @@
 const mineflayer = require('mineflayer');
 const { goals } = require('mineflayer-pathfinder');
+const pathfinder = require('mineflayer-pathfinder').pathfinder;
 const collectBlock = require('mineflayer-collectblock');
-const { program } = require('commander');
 
 function criarBot() {
   const bot = mineflayer.createBot({
@@ -12,8 +12,8 @@ function criarBot() {
   });
 
   // ✅ Plugins carregados corretamente
-  bot.loadPlugin(require('mineflayer-pathfinder'));
-  bot.loadPlugin(collectBlock);
+  bot.loadPlugin(pathfinder);
+  bot.loadPlugin(collectBlock.plugin);
 
   // ✅ Reconnect automático
   bot.on('end', () => {
@@ -21,23 +21,10 @@ function criarBot() {
     setTimeout(criarBot, 5000);
   });
 
-  // ✅ Trata erros de conexão
-  bot.on('error', (err) => {
-    console.error('Erro de conexão:', err.message);
-  });
-
   // ✅ Comandos CLI
   program
-    .command('mover_para <x> <y> <z>')
-    .description('Move o bot para uma posição')
-    .action((x, y, z) => {
-      const goal = new goals.GoalBlock(parseInt(x), parseInt(y), parseInt(z));
-      bot.pathfinder.setGoal(goal);
-    });
-
-  program
     .command('coletar <item> [quantidade]')
-    .description('Coleta um item')
+    .description('Coleta um item específico')
     .action((item, quantidade = '1') => {
       coletarItem(bot, item, parseInt(quantidade));
     });
@@ -53,7 +40,6 @@ function criarBot() {
 }
 
 // --- FUNÇÕES GENÉRICAS DO BOT ---
-
 function coletarItem(bot, itemName, quantidade) {
   const mcData = require('minecraft-data')(bot.version);
   const blockId = Object.values(mcData.blocksByName).find(b => b.displayName === itemName)?.id;
