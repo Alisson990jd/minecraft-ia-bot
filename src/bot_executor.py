@@ -1,9 +1,7 @@
-# src/bot_executor.py
-
 import os
 import json
 import subprocess
-from ollama_ia import gerar_plano_acao  # ✅ Import da função
+from ollama_ia import gerar_plano_acao
 
 # Estado inicial simulado
 estado_jogo = {
@@ -22,18 +20,10 @@ def executar_plano(plano):
             args = list(map(str, passo["posicao"]))
         elif acao == "coletar":
             args = [passo["item"], str(passo.get("quantidade", 1))]
-        elif acao == "craftar":
-            args = [passo["item"], str(passo.get("quantidade", 1))]
-        elif acao == "construir":
-            args = [passo["estrutura"], *map(str, passo["tamanho"])]
         elif acao == "domar":
             args = [passo["animal"]]
-        elif acao == "encantar":
-            args = [passo["item"], passo["enchant"]]
-        elif acao == "fazer_pocao":
-            args = [passo["tipo"]]
         else:
-            print(f"Ação desconhecida: {acao}")
+            print(f"[Ignorando] Ação desconhecida: {acao}")
             continue
 
         print(f"[Bot] Executando: {acao} {' '.join(args)}")
@@ -41,7 +31,7 @@ def executar_plano(plano):
 
 if __name__ == "__main__":
     # Lê o comando da variável de ambiente ou usa um padrão
-    comando_usuario = os.getenv("MINECRAFT_COMMAND", "Construa uma casa de madeira com 2 andares")
+    comando_usuario = os.getenv("MINECRAFT_COMMAND", "Domar um cavalo")
     print(f"[Comando Automático]: {comando_usuario}")
 
     plano = gerar_plano_acao(comando_usuario, estado_jogo)
